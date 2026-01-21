@@ -1,7 +1,4 @@
 ﻿name: Cross-platform Builds
-permissions: 
-  contents: read
-  
 on:
   pull_request:
     branches: [ 'master' ]
@@ -12,9 +9,12 @@ on:
     
 jobs:
   build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      
     strategy:
       fail-fast: true
-      
       matrix:
         build-tool: [ ninja ]
         compiler: [ mingw64, gcc ]
@@ -27,13 +27,14 @@ jobs:
           - target: linux
             compiler: mingw64
             
-    uses: VolcanusLucis/.github/.github/workflows/build-cmake-project-presets.yml@master
-    with:
-      architecture: ${{ matrix.architecture }}
-      build-tool: ${{ matrix.build-tool }}
-      build-type: ${{ matrix.build-type }}
-      compiler: ${{ matrix.compiler }}
-      target: ${{ matrix.target }}
+    steps:
+    - uses: VolcanusLucis/.github/.github/actions/build-cmake-project-presets@master
+      with:
+        architecture: ${{ matrix.architecture }}
+        build-tool: ${{ matrix.build-tool }}
+        build-type: ${{ matrix.build-type }}
+        compiler: ${{ matrix.compiler }}
+        target: ${{ matrix.target }}
 
   build-all:
     if: always()
