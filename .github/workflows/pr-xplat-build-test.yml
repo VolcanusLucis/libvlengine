@@ -28,7 +28,7 @@ jobs:
             compiler: mingw64
             
     steps:
-    - uses: VolcanusLucis/.github/.github/actions/build-cmake-project-presets.yml@master
+    - uses: VolcanusLucis/.github/.github/actions/build-cmake-project-presets@master
       with:
         architecture: ${{ matrix.architecture }}
         build-tool: ${{ matrix.build-tool }}
