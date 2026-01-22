@@ -35,7 +35,7 @@ jobs:
           build-mode: ${{ matrix.build-mode }}
           manual-command-list: ${{ matrix.manual-command-list }}
   
-  run-codeql:
+  verify-codeql:
     permissions:
       contents: none
     
