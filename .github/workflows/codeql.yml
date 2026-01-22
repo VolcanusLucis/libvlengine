@@ -1,7 +1,7 @@
 name: CodeQL
 on:
   pull_request:
-    branches: [ "master" ]
+    branches: [ 'master' ]
 
 jobs:
   codeql:
@@ -10,7 +10,7 @@ jobs:
       security-events: write
       packages: read
       contents: read
-      
+    
     strategy:
       fail-fast: true
       matrix:
@@ -22,10 +22,10 @@ jobs:
               -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DCMAKE_CXX_FLAGS="-O3 -Wall -std=c++23"
               
               cmake --build ./build --config Release
-              
+
           - language: actions
             build-mode: none
-            
+    
     steps:
       - run: echo "Running CodeQL for ${{ matrix.language }}"
       - name: Run CodeQL
@@ -34,11 +34,11 @@ jobs:
           language: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
           manual-command-list: ${{ matrix.manual-command-list }}
-    
+  
   run-codeql:
     permissions:
       contents: none
-      
+    
     if: always()
     runs-on: ubuntu-latest
     needs: codeql
